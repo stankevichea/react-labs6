@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 
-import axios from 'axios'
-
-import uuid from "uuid";
 import PageEmployeesList from './PageEmployeesList';
 import PageEmployee from './PageEmployee';
 
@@ -20,11 +22,16 @@ class MyApp extends Component {
 
      
         return (
-         <div> 
-    <PageEmployee/>
-
-    <PageEmployeesList/>
-    </div> 
+          <Router>
+          <Switch>
+            <Route exact path="/">
+              <PageEmployeesList />
+            </Route>
+            <Route exact path="/new">
+              <PageEmployee />
+            </Route>
+          </Switch>
+        </Router>
          
     )
   }

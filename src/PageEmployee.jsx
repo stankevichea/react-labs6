@@ -1,7 +1,9 @@
 import React from 'react'
 import uuid from "uuid";
 import axios from 'axios'
-
+import {
+  withRouter
+} from "react-router-dom";
 class PageEmployee extends React.Component {
     constructor(props) {
         super(props);
@@ -53,7 +55,8 @@ class PageEmployee extends React.Component {
         then(data => this.setState({isSaving : false}))
         .then( data => fetch('http://localhost:3004/employees')
         .then(response => response.json())
-        .then(data => this.setState({todos : data , name : "", age : "", company : "", email: "", isActive : true,showMessage:false})));
+        .then(data => this.setState({todos : data , name : "", age : "", company : "", email: "", isActive : true,showMessage:false}))
+      );
       
     
       
@@ -72,6 +75,7 @@ class PageEmployee extends React.Component {
             this.setState({
               showMessage: false
             });
+           
           }
           submitHandler(name, age, company, email, isActive) {
         fetch('http://localhost:3004/employees', {
@@ -90,9 +94,9 @@ class PageEmployee extends React.Component {
     }
     
    
-    render() {if(this.state.saving){
-        console.log("was here");
-        console.log(this.state.todos);
+    render() {
+      if(this.state.saving){
+       
         location.reload();
         return (
           <label>saving...</label>
@@ -140,4 +144,4 @@ class PageEmployee extends React.Component {
     }
 }
 
-export default PageEmployee
+export default withRouter(PageEmployee)

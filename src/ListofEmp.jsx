@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 
-import axios from 'axios'
-
-import uuid from "uuid";
-
 class ListofEmp extends Component {
   constructor() {
     super();
@@ -11,13 +7,10 @@ class ListofEmp extends Component {
     this.state = {
         todos: [],
        loading:false,
-       saving:false,
-       showMessage:false,
-        name: "",
-            company:"",
-            age:0,
-            email:"",
-            isActive:false,
+     
+
+      
+           
             is_being_deleted : "",
             which_id_exactly:""
           }
@@ -34,7 +27,7 @@ class ListofEmp extends Component {
     .then(res => res.json())
     .then((data) => {
       this.setState({ todos: data,loading:true,saving:false})
-      console.log(this.state.todos)
+     
     })
     .catch(console.log)
   }
@@ -69,10 +62,6 @@ class ListofEmp extends Component {
   render() {
 
       if(!this.state.loading){
-        console.log("here here");
-    //location.reload();
-        
-
         return (
             <label>Loading...</label>
            
@@ -122,8 +111,6 @@ class ListofEmp extends Component {
                         }
                         </tr>)
                         }
-
-
 
 
                 </tbody>                               
