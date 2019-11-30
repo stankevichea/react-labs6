@@ -11,7 +11,7 @@ class PageEmployee extends React.Component {
       
         this.state = {
             todos: [],
-           loading:false,
+          
            saving:false,
            showMessage:false,
             name: "",
@@ -19,8 +19,7 @@ class PageEmployee extends React.Component {
                 age:0,
                 email:"",
                 isActive:false,
-                is_being_deleted : "",
-                which_id_exactly:""
+        
               }
               
     }
@@ -37,7 +36,7 @@ class PageEmployee extends React.Component {
       saving:true
      
     });
-    console.log("1")
+ 
     var z={
      "id":uuid.v4(),
       "isActive":this.state.isActive,
@@ -47,15 +46,16 @@ class PageEmployee extends React.Component {
       "email": this.state.email.toString()
     }
     
-    console.log(z);
-    console.log(this.state.name.toString());
+   
         if(this.state.name!="")
        axios.post('http://localhost:3004/employees',z).
         then(response=>{console.log(response)}).catch(error=>{console.log(error)}).
         then(data => this.setState({isSaving : false}))
         .then( data => fetch('http://localhost:3004/employees')
         .then(response => response.json())
-        .then(data => this.setState({todos : data , name : "", age : "", company : "", email: "", isActive : true,showMessage:false}))
+        .then(data => this.setState({todos : data , name : "", age : "", company : "", email: "", isActive : true,showMessage:false})).then(() => {
+          this.props.history.push("/");
+      })
       );
       
     
@@ -75,7 +75,7 @@ class PageEmployee extends React.Component {
             this.setState({
               showMessage: false
             });
-           
+            this.props.history.push("/");
           }
           submitHandler(name, age, company, email, isActive) {
         fetch('http://localhost:3004/employees', {
@@ -97,7 +97,7 @@ class PageEmployee extends React.Component {
     render() {
       if(this.state.saving){
        
-        location.reload();
+       
         return (
           <label>saving...</label>
          
